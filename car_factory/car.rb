@@ -10,6 +10,7 @@ class Car
   @@last_color_index = 0
 
   BRANDS = {
+    lancia: 'Lancia',
     fiat: 'Fiat',
     subaru: 'Subaru'
   }
