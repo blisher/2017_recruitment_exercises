@@ -3,6 +3,7 @@ require_relative 'roller.rb'
 
 # rolls seven times with dice k-20
 # rejects maximum and minimum value
+# then rolls once again
 
 dice_k20 = Dice.new(20)
 roller = Roller.new(dice_k20, 7)

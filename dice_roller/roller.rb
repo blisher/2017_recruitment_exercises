@@ -14,6 +14,7 @@ class Roller
     result.sort!
     result.pop
     result.shift
+    result.push(dice.roll)
     result
   end
 end
