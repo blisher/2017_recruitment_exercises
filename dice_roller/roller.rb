@@ -1,7 +1,8 @@
 class Roller
   attr_reader :dice, :rolls_count
+  attr_writer :reject_method, :force_additional_roll
 
-  def initialize(dice, rolls_count, reject_method)
+  def initialize(dice, rolls_count, reject_method = :reject_minmax)
     @dice = dice
     @rolls_count = rolls_count
     @reject_method = reject_method
@@ -13,10 +14,8 @@ class Roller
       result.push(dice.roll)
     end
     result.sort!
-    puts "rolled: #{result.inspect}"
     send(@reject_method, result)
-    puts "after reject: #{result.inspect}"
-    result.push(dice.roll)
+    result.push(@force_additional_roll || dice.roll)
     result
   end
 

@@ -5,18 +5,18 @@ require_relative 'roller.rb'
 # if it returns (1..7), then rolls k-30 once again,
 # and if it returns 1, then not minmax is rejected, but 2 smallest numbers
 
+# moreover, if initial roll returns (24..30) then additional roll
+# after array contains 5 numbers is always 25
+
 dice_k30 = Dice.new(30)
 dice_k20 = Dice.new(20)
-reject_method = if (1..7).include?(dice_k30.roll) && dice_k30.roll == 1
-                  puts 'TWO SMALLEST'
-                  :reject_two_smallest
-                else
-                  puts 'MIN MAX'
-                  :reject_minmax
-                end
+roller = Roller.new(dice_k20, 7)
+initial_k30_roll_result = dice_k30.roll
 
-
-
-roller = Roller.new(dice_k20, 7, reject_method)
+if (24..30).include?(initial_k30_roll_result)
+  roller.force_additional_roll = 25
+elsif (1..7).include?(initial_k30_roll_result) && dice_k30.roll == 1
+  roller.reject_method = :reject_two_smallest
+end
 
 puts roller.perform.inspect
